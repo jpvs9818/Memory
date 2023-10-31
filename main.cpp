@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdlib.h>
 #include <math.h>
 #include <fstream>
 using namespace std;
@@ -76,14 +75,30 @@ void printValue(unsigned int binary[architecture], int x){
    << "Valor lido : " << data_value;
 }
 
+unsigned short int numberChoice(){
+    double value = 0;
+    unsigned short int return_value;
+    do{
+        value = 0;
+        cout << "Insira um valor de 0 até o valor 32767" << endl;
+        cin >> value;
+    }while(value < 0 || value > 32767);
+    return_value = value;
+    return return_value;
+}
+
 int main() {
-    unsigned short int number = 78;
-    unsigned int binary[architecture] = {0};
+    int choice = 0;
+    do {
+        unsigned short int number = numberChoice();
+        unsigned int binary[architecture] = {0};
 
         decimalToBinary(number, binary);
         printBinary(binary);
         cout << endl;
-        printValue(binary,number);
-
+        printValue(binary, number);
+        cout << endl << "Aperte 1 para recomeçar"<<endl;
+        cin >> choice;
+    }while(choice == 1);
     return 0;
 }
